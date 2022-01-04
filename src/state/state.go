@@ -14,6 +14,8 @@ const (
 	RLOCK
 	WLOCK
 	CAS
+
+	PUT_BLIND // Result not needed immediately
 )
 
 type Value int64
@@ -34,17 +36,21 @@ type State struct {
 	//DB *leveldb.DB
 }
 
-func NewState() *State {
-	/*
-		 d, err := leveldb.Open("/Users/iulian/git/epaxos-batching/dpaxos/bin/db", nil)
+//func NewState() *State {
+//	/*
+//		 d, err := leveldb.Open("/Users/iulian/git/epaxos-batching/dpaxos/bin/db", nil)
+//
+//		 if err != nil {
+//				 log.Printf("Leveldb open failed: %v\n", err)
+//		 }
+//
+//		 return &State{d}
+//	*/
+//
+//	return &State{make(map[Key]Value)}
+//}
 
-		 if err != nil {
-				 log.Printf("Leveldb open failed: %v\n", err)
-		 }
-
-		 return &State{d}
-	*/
-
+func InitState() *State {
 	return &State{make(map[Key]Value)}
 }
 
@@ -52,6 +58,10 @@ func NewState() *State {
 func AllOpTypes() []Operation {
 	return []Operation{PUT, GET, CAS}
 }
+
+//func AllOpTypes() []Operation {
+//	return []Operation{PUT, GET, CAS, PUT_BLIND}
+//}
 
 func GetConflictingOpTypes(op Operation) []Operation {
 	switch op {
@@ -108,7 +118,7 @@ func (c *Command) Execute(st *State) Value {
 	//    defer st.mutex.Unlock()
 
 	switch c.Op {
-		case PUT:
+		case PUT, PUT_BLIND:
 			/*
 				 binary.LittleEndian.PutUint64(key[:], uint64(c.K))
 				 binary.LittleEndian.PutUint64(value[:], uint64(c.V))

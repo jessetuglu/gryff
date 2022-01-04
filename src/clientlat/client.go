@@ -126,8 +126,8 @@ func simulatedClient(rlReply *masterproto.GetReplicaListReply, leader int, readi
 	}
 
 	var id int32 = 0
-	args := genericsmrproto.Propose{id, state.Command{state.PUT, 0, 0}}
-	var reply genericsmrproto.ProposeReply
+	args := genericsmrproto.Propose{id, state.Command{state.PUT, 0, 0, 0}}
+	var reply genericsmrproto.ProposeReplyTS
 
 	n := *reqsNb
 

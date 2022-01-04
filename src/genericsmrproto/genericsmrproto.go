@@ -5,6 +5,10 @@ import (
 	"fastrpc"
 )
 
+const (
+	PROPOSE uint8 = iota
+)
+
 type Propose struct {
 	CommandId int32
 	Command   state.Command

@@ -248,7 +248,7 @@ func main() {
 func waitReplies(readers []*bufio.Reader, leader int, n int, done chan bool) {
 	e := false
 
-	reply := new(genericsmrproto.ProposeReply)
+		reply := new(genericsmrproto.ProposeReply)
 	for i := 0; i < n; i++ {
 		/*if *noLeader {
 		    leader = rarray[i]
