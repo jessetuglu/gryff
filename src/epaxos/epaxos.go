@@ -160,6 +160,8 @@ func NewReplica(id int, peerAddrList []string, thrifty bool, exec bool,
 		noConflicts,
 	}
 
+	log.Println("got here 163")
+
 	r.Beacon = beacon
 	r.Durable = durable
 
@@ -178,6 +180,8 @@ func NewReplica(id int, peerAddrList []string, thrifty bool, exec bool,
 	r.exec = &Exec{r}
 
 	cpMarker = make([]state.Command, 0)
+
+	log.Println("got here 184")
 
 	//register RPCs
 	r.prepareRPC = r.RegisterRPC(new(epaxosproto.Prepare), r.prepareChan)

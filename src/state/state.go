@@ -36,21 +36,17 @@ type State struct {
 	//DB *leveldb.DB
 }
 
-//func NewState() *State {
-//	/*
-//		 d, err := leveldb.Open("/Users/iulian/git/epaxos-batching/dpaxos/bin/db", nil)
-//
-//		 if err != nil {
-//				 log.Printf("Leveldb open failed: %v\n", err)
-//		 }
-//
-//		 return &State{d}
-//	*/
-//
-//	return &State{make(map[Key]Value)}
-//}
+func NewState() *State {
+	/*
+		 d, err := leveldb.Open("/Users/iulian/git/epaxos-batching/dpaxos/bin/db", nil)
 
-func InitState() *State {
+		 if err != nil {
+				 log.Printf("Leveldb open failed: %v\n", err)
+		 }
+
+		 return &State{d}
+	*/
+
 	return &State{make(map[Key]Value)}
 }
 
